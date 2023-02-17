@@ -1,31 +1,26 @@
 <?php include ('header.php');
  include ('config.php');
  
- 
 
+ $msg="";
 
- if(isset($_GET['patient_id']) && ($_GET['type']))
+ if($_SERVER['REQUEST_METHOD']=="POST" && isset($_GET['patient_id']))
  {
-  
-  $patient_id=$_GET['patient_id'];
-  $type=$_GET['type'];
+ $patient_id=$_GET['patient_id'];
+ $symptoms=$_POST['symptoms'];
+ $prescribed_medications=$_POST['prescribed_medications'];
+ $conclusion=$_POST['conclusion'];
  
- if($type="delete")
- {
  
-$query="DELETE FROM patient_info WHERE patient_id=$patient_id";
+ $query="INSERT INTO patient_appointment(patient_id,symptoms,prescribed_medications,conclusion) VALUES('$patient_id','$symptoms','$prescribed_medications','$conclusion')";
+ echo $query;
  $res=mysqli_query($con,$query);
+ 
+ 
  }
-   
-  }
-
-  $query="SELECT * FROM patient_info";
- $res=mysqli_query($con,$query);
-
-
 
 ?>
-<link rel="stylesheet" href="DataTables/datatables.css">
+
 <body>
 
   <!-- ======= Header ======= -->
@@ -257,12 +252,12 @@ $query="DELETE FROM patient_info WHERE patient_id=$patient_id";
 
   </header><!-- End Header -->
 
- <?php include ('sidebar.php'); ?>
+ <?php include('sidebar.php'); ?>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Registered Patients</h1>
+      <h1>Add Appointment</h1>
   <!--    <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -272,77 +267,44 @@ $query="DELETE FROM patient_info WHERE patient_id=$patient_id";
       </nav> -->
     </div><!-- End Page Title -->
 
+    <section class="section">
     <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Bordered Table</h5>
-              
-              <!-- Bordered Table -->
-              <table class="table table-bordered " id="mytable">
-                <thead>
-                  <tr>
-                    <th scope="col">Sr. No </th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Number</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">city</th>
-                    <th scope="col">Blood Group</th>
-                    <th scope="col">Previous Ailments</th>
-                    <th scope="col"> Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <?php 
-                    $i=1;
-                    while($row=mysqli_fetch_assoc($res))
-                    {  ?> 
-                  <tr>
-                    <th scope="row"><?php echo $i?></th>
-                    <td><?php echo $row['patient_name']?></td>
-                    <td><?php echo $row['patient_number']?></td>
-                    <td><?php echo $row['patient_age']?></td>
-                    <td><?php echo $row['patient_Address']?></td>
-                    <td><?php echo $row['patient_city']?></td>
-                    <td><?php echo $row['patient_blood_group']?></td>
-                    <td><?php echo $row['patient_previous_ailments']?></td>
-                    <td><a href="?patient_id=<?php echo $row['patient_id']?>&type=delete">
-                        <button type="button" class="btn btn-danger">Delete</button>
-                    </a>
+              <h5 class="card-title text-danger"><?php echo $msg ;?></h5>
 
-                    <a href="edit_patient_info.php?patient_id=<?php echo $row['patient_id']?>"><button type="button" class="btn btn-primary" >
-                      Edit</button>
-                    </a>
+              <!-- Floating Labels Form -->
+              <form class="row g-3"  method="POST">
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <textarea type="textarea" class="form-control" name="symptoms" required id="floatingName" placeholder="Your Name"></textarea>
+                    <label for="floatingName">Symptoms</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <textarea type="number" class="form-control" name="prescribed_medications" required id="floatingEmail" placeholder="Your Email"></textarea>
+                    <label for="floatingEmail">prescribed Medications</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <textarea type="name" class="form-control" required name="conclusion" id="floatingPassword" placeholder="Password"></textarea>
+                    <label for="floatingPassword">conclusion</label>
+                  </div>
+                </div>
+                
+                
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+              </form><!-- End floating Labels Form -->
 
-                    <a href="add_appointment.php?patient_id=<?php echo $row['patient_id']?>"><button type="button" class="btn btn-info" >
-                      Add appointment</button>
-                    </a>
-                    </td>
-                  </tr>
-                  <?php $i++;} ?>
-                  </tbody>
-              </table>
-
-
-
-  
-              <script src="DataTables/datatables.js"></script>
-              
-              <script>
-
-
-    $(document).ready( function () {
-    $('#mytable').DataTable();
-} );
-  </script>
+            </div>
+          </div>
+    </section>
 
   </main><!-- End #main -->
+ 
 
-  <?php 
-  
-  
-  
-  
-  
-  
-  
-  include('footer.php');?>
+  <?php include('footer.php');?>
