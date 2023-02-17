@@ -4,24 +4,22 @@
  
 
 
- if(isset($_GET['patient_id']) && ($_GET['type']))
+ if(isset($_GET['patient_id']) && ($_GET['type']=='history'))
  {
   
   $patient_id=$_GET['patient_id'];
-  $type=$_GET['type'];
  
- if($type="delete")
+ 
+ if($type="history")
  {
  
-$query="DELETE FROM patient_info WHERE patient_id=$patient_id";
+$query= "select patient_info.patient_name,patient_appointment.patient_id,patient_appointment.visit_date,patient_appointment.symptoms,patient_appointment.conclusion from patient_appointment INNER JOIN patient_info ON patient_appointment.patient_id=patient_info.patient_id where patient_info.patient_id=38";
  $res=mysqli_query($con,$query);
  }
    
   }
 
-  $query="SELECT * FROM patient_info";
- $res=mysqli_query($con,$query);
-
+ 
 
 
 ?>
@@ -282,12 +280,9 @@ $query="DELETE FROM patient_info WHERE patient_id=$patient_id";
                   <tr>
                     <th scope="col">Sr. No </th>
                     <th scope="col">Name</th>
-                    <th scope="col">Number</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">city</th>
-                    <th scope="col">Blood Group</th>
-                    <th scope="col">Previous Ailments</th>
+                    <th scope="col">visit date</th>
+                    <th scope="col">symptoms</th>
+                    <th scope="col">conclusion</th>
                     <th scope="col"> Action</th>
                   </tr>
                 </thead>
@@ -299,12 +294,9 @@ $query="DELETE FROM patient_info WHERE patient_id=$patient_id";
                   <tr>
                     <th scope="row"><?php echo $i?></th>
                     <td><?php echo $row['patient_name']?></td>
-                    <td><?php echo $row['patient_number']?></td>
-                    <td><?php echo $row['patient_age']?></td>
-                    <td><?php echo $row['patient_Address']?></td>
-                    <td><?php echo $row['patient_city']?></td>
-                    <td><?php echo $row['patient_blood_group']?></td>
-                    <td><?php echo $row['patient_previous_ailments']?></td>
+                    <td><?php echo $row['visit_date']?></td>
+                    <td><?php echo $row['symptoms']?></td>
+                    <td><?php echo $row['conclusion']?></td>
                     <td><a href="?patient_id=<?php echo $row['patient_id']?>&type=delete">
                         <button type="button" class="btn btn-danger">Delete</button>
                     </a>
@@ -312,15 +304,7 @@ $query="DELETE FROM patient_info WHERE patient_id=$patient_id";
                     <a href="edit_patient_info.php?patient_id=<?php echo $row['patient_id']?>"><button type="button" class="btn btn-primary" >
                       Edit</button>
                     </a>
-
-                    <a href="add_appointment.php?patient_id=<?php echo $row['patient_id']?>"><button type="button" class="btn btn-info" >
-                      Add appointment</button>
-                    </a>
-
-                    <a href="view_patient_history.php?patient_id=<?php echo $row['patient_id']?>&type=history"><button type="button" class="btn btn-success" >
-                      View History</button>
-                    </a>
-                    </td>
+                  </td>
                   </tr>
                   <?php $i++;} ?>
                   </tbody>
@@ -346,7 +330,7 @@ $query="DELETE FROM patient_info WHERE patient_id=$patient_id";
   
   
   
-  
+//  select patient_info.patient_name,patient_appointment.patient_id,patient_appointment.visit_date,patient_appointment.symptoms,patient_appointment.conclusion from patient_appointment INNER JOIN patient_info ON patient_appointment.patient_id=patient_info.patient_id;
   
   
   include('footer.php');?>
