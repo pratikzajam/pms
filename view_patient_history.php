@@ -4,21 +4,30 @@
  
 
 
- if(isset($_GET['patient_id']) && ($_GET['type']=='history'))
+
+ if(isset($_GET['patient_id']) && ($_GET['type'])) 
  {
   
   $patient_id=$_GET['patient_id'];
- 
+ echo "history";
  
  if($type="history")
  {
  
-$query= "select patient_info.patient_name,patient_appointment.patient_id,patient_appointment.visit_date,patient_appointment.symptoms,patient_appointment.conclusion from patient_appointment INNER JOIN patient_info ON patient_appointment.patient_id=patient_info.patient_id where patient_info.patient_id=38";
+$query= "select patient_info.patient_name,patient_appointment.patient_id,patient_appointment.visit_date,patient_appointment.symptoms,patient_appointment.conclusion from patient_appointment INNER JOIN patient_info ON patient_appointment.patient_id=patient_info.patient_id where patient_info.patient_id=$patient_id";
  $res=mysqli_query($con,$query);
+ }
+
+ if($type="delete")
+ {
+$patient_id=$_GET['patient_id'];
+$delete_query= "delete from patient_appointment where patient_id=$patient_id;";
+$delete=mysqli_query($con,$delete_query);
  }
    
   }
 
+  
  
 
 
