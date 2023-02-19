@@ -4,6 +4,13 @@
 
  $msg="";
 
+ $id=$_GET['id'];
+ $patient_id=$_GET['patient_id'];
+
+ $fetch_data="SELECT * FROM patient_appointment where patient_id=$patient_id and id=$id";
+ $row=mysqli_fetch_assoc(mysqli_query($con,$fetch_data));
+ 
+ 
  if($_SERVER['REQUEST_METHOD']=="POST" && isset($_GET['patient_id'] ) && isset($_GET['id'] ))
  {
   $id=$_GET['id'];
@@ -18,7 +25,11 @@
  $res=mysqli_query($con,$query);
  
  
+
  }
+
+
+ 
 
 ?>
 
@@ -277,19 +288,19 @@
               <form class="row g-3"  method="POST">
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <textarea type="textarea" class="form-control" name="symptoms" required id="floatingName" placeholder="Your Name"></textarea>
+                    <input type="textarea" class="form-control" value=<?php echo $row['symptoms']?> name="symptoms" required id="floatingName" placeholder="Your Name"></input>
                     <label for="floatingName">Symptoms</label>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <textarea type="number" class="form-control" name="prescribed_medications" required id="floatingEmail" placeholder="Your Email"></textarea>
+                    <input type="number" class="form-control" name="prescribed_medications" value="<?php echo $row['prescribed_medications']?>" required id="floatingEmail" placeholder="Your Email"></input>
                     <label for="floatingEmail">prescribed Medications</label>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <textarea type="name" class="form-control" required name="conclusion" id="floatingPassword" placeholder="Password"></textarea>
+                    <input type="name" class="form-control" required value="<?php echo $row['conclusion']?>" name="conclusion" id="floatingPassword" placeholder="Password"></input>
                     <label for="floatingPassword">conclusion</label>
                   </div>
                 </div>
