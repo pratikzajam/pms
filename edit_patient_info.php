@@ -6,7 +6,7 @@
 
  $patient_id=$_GET['patient_id'];
 
-$fetch_data="SELECT * FROM patient_info WHERE patient_id=$patient_id";
+$fetch_data="SELECT * FROM patient_appointment WHERE patient_id=$patient_id";
 
 $row=mysqli_fetch_assoc(mysqli_query($con,$fetch_data));
 
@@ -18,15 +18,13 @@ $row=mysqli_fetch_assoc(mysqli_query($con,$fetch_data));
     
  $patient_id=$_GET['patient_id'];
 
-$name=$_POST['patient_name'];
- $number=$_POST['patient_number'];
- $age=$_POST['patient_age'];
- $address=$_POST['patient_address'];
- $city=$_POST['patient_city'];
- $blood_group=$_POST['patient_blood_group'];
- $previous_ailments=$_POST['patient_previous_ailments'];
+$visit_date=$_POST['visit_date'];
+ $symptoms=$_POST['symptoms'];
+ $prescribed_medication=$_POST['prescribed_medications'];
+ $conclusion=$_POST['conclusion'];
  
- $query="UPDATE patient_info SET patient_name='$name',patient_number=$number,patient_age=$age,patient_Address='$address',patient_city='$city',patient_blood_group='$blood_group',patient_previous_ailments='$previous_ailments' WHERE patient_id=$patient_id";
+ 
+ $query="UPDATE patient_info SET visit_date='$visit_date',symptoms=$symptoms,prescribed_medication=$prescribed_medication,conclusion='$conclusion' WHERE patient_id=$patient_id";
 
 
  mysqli_query($con,$query);
