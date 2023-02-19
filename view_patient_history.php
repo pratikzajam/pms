@@ -9,16 +9,16 @@
  {
   
   $patient_id=$_GET['patient_id'];
- echo "history";
+ 
  
  if($type="history")
  {
  
-$query= "select patient_info.patient_name,patient_appointment.patient_id,patient_appointment.visit_date,patient_appointment.symptoms,patient_appointment.conclusion from patient_appointment INNER JOIN patient_info ON patient_appointment.patient_id=patient_info.patient_id where patient_info.patient_id=$patient_id";
+$query= "select patient_appointment.id, patient_info.patient_name,patient_appointment.patient_id,patient_appointment.visit_date,patient_appointment.symptoms,patient_appointment.conclusion from patient_appointment INNER JOIN patient_info ON patient_appointment.patient_id=patient_info.patient_id where patient_info.patient_id=$patient_id";
  $res=mysqli_query($con,$query);
  }
 
- if($type="delete")
+ if($type=="delete")
  {
 $patient_id=$_GET['patient_id'];
 $delete_query= "delete from patient_appointment where patient_id=$patient_id;";
@@ -310,7 +310,7 @@ $delete=mysqli_query($con,$delete_query);
                         <button type="button" class="btn btn-danger">Delete</button>
                     </a>
 
-                    <a href="edit_patient_info.php?patient_id=<?php echo $row['patient_id']?>"><button type="button" class="btn btn-primary" >
+                    <a href="edit_patient_history.php?patient_id=<?php echo $row['patient_id']?>&id=<?php echo $row['id'] ?>"><button type="button" class="btn btn-primary" >
                       Edit</button>
                     </a>
                   </td>

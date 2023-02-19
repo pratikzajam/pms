@@ -4,36 +4,21 @@
 
  $msg="";
 
- $patient_id=$_GET['patient_id'];
-
-$fetch_data="SELECT * FROM patient_appointment WHERE patient_id=$patient_id";
-
-$row=mysqli_fetch_assoc(mysqli_query($con,$fetch_data));
-
-
- 
-
- if($_SERVER['REQUEST_METHOD']=="POST" && $_GET['patient_id'])
+ if($_SERVER['REQUEST_METHOD']=="POST" && isset($_GET['patient_id'] ) && isset($_GET['id'] ))
  {
-    
+  $id=$_GET['id'];
  $patient_id=$_GET['patient_id'];
-
-$visit_date=$_POST['visit_date'];
  $symptoms=$_POST['symptoms'];
- $prescribed_medication=$_POST['prescribed_medications'];
+ $prescribed_medications=$_POST['prescribed_medications'];
  $conclusion=$_POST['conclusion'];
  
  
- $query="UPDATE patient_info SET visit_date='$visit_date',symptoms=$symptoms,prescribed_medication=$prescribed_medication,conclusion='$conclusion' WHERE patient_id=$patient_id";
-
-
- mysqli_query($con,$query);
-
- header("location:registered_patients.php");
+ $query="UPDATE patient_appointment SET symptoms='$symptoms',prescribed_medications='$prescribed_medications',conclusion='$conclusion' where patient_id=$patient_id and id=$id";
+ echo $query;
+ $res=mysqli_query($con,$query);
  
  
  }
- 
 
 ?>
 
@@ -268,12 +253,12 @@ $visit_date=$_POST['visit_date'];
 
   </header><!-- End Header -->
 
- <?php include('sidebar.php');?>
+ <?php include('sidebar.php'); ?>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Edit Patient Info</h1>
+      <h1>Add Appointment</h1>
   <!--    <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -289,60 +274,27 @@ $visit_date=$_POST['visit_date'];
               <h5 class="card-title text-danger"><?php echo $msg ;?></h5>
 
               <!-- Floating Labels Form -->
-              <form class="row g-3"  method="POST" id='mytable'>
+              <form class="row g-3"  method="POST">
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" name="patient_name" value=<?php echo $row['patient_name']?> required id="floatingName" placeholder="Your Name">
-                    <label for="floatingName">Patient Name</label>
+                    <textarea type="textarea" class="form-control" name="symptoms" required id="floatingName" placeholder="Your Name"></textarea>
+                    <label for="floatingName">Symptoms</label>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="number" class="form-control" value=<?php echo $row['patient_number']?> name="patient_number" required id="floatingEmail" placeholder="Your Email">
-                    <label for="floatingEmail">Phone Number</label>
+                    <textarea type="number" class="form-control" name="prescribed_medications" required id="floatingEmail" placeholder="Your Email"></textarea>
+                    <label for="floatingEmail">prescribed Medications</label>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="name" class="form-control" required name="patient_age" value=<?php echo $row['patient_age']?> id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Age</label>
+                    <textarea type="name" class="form-control" required name="conclusion" id="floatingPassword" placeholder="Password"></textarea>
+                    <label for="floatingPassword">conclusion</label>
                   </div>
                 </div>
-                <div class="col-12">
-                  <div class="form-floating">
-                    <input type=text class="form-control" required placeholder="Address" value=<?php echo $row['patient_Address']?> name="patient_address" id="floatingTextarea" style="height: 100px;">
-                    <label for="floatingTextarea">Address</label>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="col-md-12">
-                    <div class="form-floating">
-                      <input type="text" class="form-control" value=<?php echo $row['patient_city']?> name="patient_city" id="floatingCity" placeholder="City">
-                      <label for="floatingCity">City</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-floating mb-3">
-                    <select class="form-select" id="floatingSelect" value=<?php echo $row['patient_blood_group']?> name="patient_blood_group" aria-label="State" required>
-                      <option value="A+">A+</option>
-                      <option value="A-">A-</option>
-                      <option value="B+">B+</option>
-                      <option value="B-">B-</option>
-                      <option value="o-">o-</option>
-                      <option value="o+">o+</option>
-                      <option value="AB+">AB+</option>
-                      <option value="AB-">AB-</option>
-                     </select>
-                    <label for="floatingSelect">Blood Group</label>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-floating">
-                    <input type="text" required name="patient_previous_ailments" value=<?php echo $row['patient_previous_ailments']?> class="form-control" id="floatingZip" placeholder="Zip">
-                    <label for="floatingZip">Prevoius Ailments</label>
-                  </div>
-                </div>
+                
+                
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">Submit</button>
                   <button type="reset" class="btn btn-secondary">Reset</button>

@@ -29,6 +29,7 @@
  else{
  mysqli_query($con,$query);
  
+ header("location:registered_patients.php");
  
  }
  }
