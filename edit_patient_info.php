@@ -6,7 +6,7 @@
 
  $patient_id=$_GET['patient_id'];
 
-$fetch_data="SELECT * FROM patient_appointment WHERE patient_id=$patient_id";
+$fetch_data="SELECT * FROM patient_info WHERE patient_id=$patient_id";
 
 $row=mysqli_fetch_assoc(mysqli_query($con,$fetch_data));
 
@@ -18,13 +18,18 @@ $row=mysqli_fetch_assoc(mysqli_query($con,$fetch_data));
     
  $patient_id=$_GET['patient_id'];
 
-$visit_date=$_POST['visit_date'];
- $symptoms=$_POST['symptoms'];
- $prescribed_medication=$_POST['prescribed_medications'];
- $conclusion=$_POST['conclusion'];
+$patient_name=$_POST['patient_name'];
+$patient_number=$_POST['patient_number'];
+ $patient_age=$_POST['patient_age'];
+ $patient_Address=$_POST['patient_Address'];
+ $patient_city=$_POST['patient_city'];
+ $patient_blood_group=$_POST['patient_blood_group'];
+ $patient_previous_ailments=$_POST['patient_previous_ailments'];
  
  
- $query="UPDATE patient_info SET visit_date='$visit_date',symptoms=$symptoms,prescribed_medication=$prescribed_medication,conclusion='$conclusion' WHERE patient_id=$patient_id";
+ $query="UPDATE patient_info SET patient_name='$patient_name',patient_number=$patient_number,patient_age=$patient_age,patient_Address='$patient_Address',patient_city='$patient_city',patient_blood_group='$patient_blood_group',patient_previous_ailments='$patient_previous_ailments' WHERE patient_id=$patient_id";
+
+ echo $query;
 
 
  mysqli_query($con,$query);
@@ -310,7 +315,7 @@ $visit_date=$_POST['visit_date'];
                 </div>
                 <div class="col-12">
                   <div class="form-floating">
-                    <input type=text class="form-control" required placeholder="Address" value=<?php echo $row['patient_Address']?> name="patient_address" id="floatingTextarea" style="height: 100px;">
+                    <input type=text class="form-control" required placeholder="Address" value=<?php echo $row['patient_Address']?> name="patient_Address" id="floatingTextarea" style="height: 100px;">
                     <label for="floatingTextarea">Address</label>
                   </div>
                 </div>
@@ -357,3 +362,6 @@ $visit_date=$_POST['visit_date'];
  
 
   <?php include('footer.php');?>
+
+ 
+
