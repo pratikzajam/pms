@@ -273,7 +273,7 @@ $query="DELETE FROM patient_info WHERE patient_id=$patient_id";
     </div><!-- End Page Title -->
 
     <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="overflow-x:auto;">
               <h5 class="card-title">Bordered Table</h5>
               
               <!-- Bordered Table -->

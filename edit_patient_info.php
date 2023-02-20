@@ -25,6 +25,7 @@ $patient_number=$_POST['patient_number'];
  $patient_city=$_POST['patient_city'];
  $patient_blood_group=$_POST['patient_blood_group'];
  $patient_previous_ailments=$_POST['patient_previous_ailments'];
+
  
  
  $query="UPDATE patient_info SET patient_name='$patient_name',patient_number=$patient_number,patient_age=$patient_age,patient_Address='$patient_Address',patient_city='$patient_city',patient_blood_group='$patient_blood_group',patient_previous_ailments='$patient_previous_ailments' WHERE patient_id=$patient_id";
@@ -297,13 +298,13 @@ $patient_number=$_POST['patient_number'];
               <form class="row g-3"  method="POST" id='mytable'>
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" name="patient_name" value=<?php echo $row['patient_name']?> required id="floatingName" placeholder="Your Name">
+                    <input type="text" class="form-control" disabled name="patient_name" value=<?php echo $row['patient_name']?> required id="floatingName" placeholder="Your Name">
                     <label for="floatingName">Patient Name</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="number" class="form-control" value=<?php echo $row['patient_number']?> name="patient_number" required id="floatingEmail" placeholder="Your Email">
+                    <input type="number" class="form-control" disabled value=<?php echo $row['patient_number']?> name="patient_number" required id="floatingEmail" placeholder="Your Email">
                     <label for="floatingEmail">Phone Number</label>
                   </div>
                 </div>

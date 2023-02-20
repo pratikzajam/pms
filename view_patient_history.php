@@ -24,8 +24,15 @@ $patient_id=$_GET['patient_id'];
 $delete_query= "delete from patient_appointment where patient_id=$patient_id;";
 $delete=mysqli_query($con,$delete_query);
  }
-   
-  }
+
+ }
+ else{
+  $query= "select patient_appointment.id, patient_info.patient_name,patient_appointment.patient_id,patient_appointment.visit_date,patient_appointment.symptoms,patient_appointment.conclusion from patient_appointment INNER JOIN patient_info ON patient_appointment.patient_id=patient_info.patient_id";
+  $res=mysqli_query($con,$query);
+
+ }
+
+ 
 
   
  
@@ -280,11 +287,11 @@ $delete=mysqli_query($con,$delete_query);
     </div><!-- End Page Title -->
 
     <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="overflow-x:auto;">
               <h5 class="card-title">Bordered Table</h5>
               
               <!-- Bordered Table -->
-              <table class="table table-bordered " id="mytable">
+              <table class="table table-bordered "  id="mytable">
                 <thead>
                   <tr>
                     <th scope="col">Sr. No </th>
