@@ -1,6 +1,11 @@
+<?php session_start();?>
 <?php include ('header.php');
  include ('config.php');
  
+ if(!isset($_SESSION['islogin']))
+ {
+     header('Location:login.php');
+ }
 
  $msg="";
 
@@ -253,7 +258,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="logout.php">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
