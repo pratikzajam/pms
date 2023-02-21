@@ -45,8 +45,8 @@ $patient_number=$_POST['patient_number'];
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
+  
+
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
@@ -273,7 +273,7 @@ $patient_number=$_POST['patient_number'];
     </nav><!-- End Icons Navigation -->
 
   </header><!-- End Header -->
-
+<?php include('navbar.php');?>
  <?php include('sidebar.php');?>
 
   <main id="main" class="main">
