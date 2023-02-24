@@ -1,11 +1,11 @@
 
-<?php include ('header.php');
+<?php 
+include ('login_check.php');
+include ('header.php');
  include ('config.php');
+ 
 
- if(!isset($_SESSION['islogin']))
-{
-    header("Location:login.php");
-}
+ 
  
  
 
