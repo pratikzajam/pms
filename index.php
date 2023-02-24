@@ -1,9 +1,9 @@
 
 <?php 
-include ('login_check.php');
+
 include ('header.php');
  include ('config.php');
- 
+ include ('login_check.php');
 
  
  
