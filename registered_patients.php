@@ -146,7 +146,7 @@ $(document).ready(function() {
   </style>
 
   </main><!-- End #main -->
-<
+
 
   <?php include('footer.php');
   

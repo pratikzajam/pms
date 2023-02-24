@@ -1,3 +1,11 @@
+<?php  
+session_start();
+include('config.php');
+include('function.inc.php');
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 

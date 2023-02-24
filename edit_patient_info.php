@@ -298,13 +298,13 @@ $patient_number=$_POST['patient_number'];
               <form class="row g-3"  method="POST" id='mytable'>
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" disabled name="patient_name" value=<?php echo $row['patient_name']?> required id="floatingName" placeholder="Your Name">
+                    <input type="text" class="form-control"  name="patient_name" value=<?php echo $row['patient_name']?> required id="floatingName" placeholder="Your Name">
                     <label for="floatingName">Patient Name</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="number" class="form-control" disabled value=<?php echo $row['patient_number']?> name="patient_number" required id="floatingEmail" placeholder="Your Email">
+                    <input type="number" class="form-control"  value=<?php echo $row['patient_number']?> name="patient_number" required id="floatingEmail" placeholder="Your Email">
                     <label for="floatingEmail">Phone Number</label>
                   </div>
                 </div>
